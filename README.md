@@ -96,13 +96,13 @@ To run the project locally:
 1. Clone the repository.
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Emzord/shopease-ecommerce.git
 ```
 
 2. Enter the project folder.
 
 ```bash
-cd <project-folder>
+cd shopease-ecommerce
 ```
 
 3. Install the dependencies.
