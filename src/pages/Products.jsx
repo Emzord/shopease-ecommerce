@@ -13,6 +13,8 @@ import SearchBar from "../components/SearchBar";
 import CategoryFilter from "../components/CategoryFilter";
 import EmptyState from "../components/EmptyState";
 import Pagination from "../components/Pagination";
+import LoadingState from "../components/LoadingState";
+import ErrorState from "../components/ErrorState";
 
 function Products() {
 
@@ -136,8 +138,8 @@ const [selectedCategory, setSelectedCategory] =
   // =========================
 
   if (loading) {
-    return <p>Loading products...</p>;
-  }
+  return <LoadingState message="Loading products..." />;
+}
 
 
   // =========================
@@ -145,8 +147,8 @@ const [selectedCategory, setSelectedCategory] =
   // =========================
 
   if (error) {
-    return <p>{error}</p>;
-  }
+  return <ErrorState message={error} />;
+}
 
 
   // =========================

@@ -5,6 +5,10 @@ import { getProductById } from "../services/productApi";
 import QuantitySelector from "../components/QuantitySelector";
 import { useCart } from "../context/CartContext";
 
+import LoadingState from "../components/LoadingState";
+import ErrorState from "../components/ErrorState";
+
+
 function ProductDetails() { 
   const { id } = useParams();
 
@@ -37,13 +41,12 @@ function ProductDetails() {
 
 
   if (loading) {
-    return <p>Loading product...</p>;
-  }
+  return <LoadingState message="Loading product..." />;
+}
 
-
-  if (error) {
-    return <p>{error}</p>;
-  }
+if (error) {
+  return <ErrorState message={error} />;
+}
 
 
   if (!product) {

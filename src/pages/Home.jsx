@@ -8,6 +8,8 @@ import {
 
 import ProductGrid from "../components/ProductGrid";
 
+import LoadingState from "../components/LoadingState";
+import ErrorState from "../components/ErrorState";
 
 function Home() {
   const navigate = useNavigate();
@@ -170,14 +172,14 @@ function Home() {
         </div>
 
 
-        {loading && (
-          <p>Loading products...</p>
-        )}
+       {loading && (
+  <LoadingState message="Loading featured products..." />
+)}
 
 
         {error && (
-          <p>{error}</p>
-        )}
+  <ErrorState message={error} />
+)}
 
 
         {!loading &&
