@@ -4,15 +4,27 @@ import {
 } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
+import LoadingState from "../components/LoadingState";
+
 
 function Profile() {
-  const { user, logout } = useAuth();
+  const {
+  user,
+  logout,
+  authLoading,
+} = useAuth();
 
   const navigate = useNavigate();
 
 function handleLogout() {
   logout();
   navigate("/login");
+  }
+  
+  if (authLoading) {
+  return (
+    <LoadingState message="Loading profile..." />
+  );
 }
 
   if (!user) {
