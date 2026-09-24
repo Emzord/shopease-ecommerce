@@ -14,10 +14,11 @@ function ProductDetails() {
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { addToCart } = useCart();
+
+  const [selectedImage, setSelectedImage] = useState("");
 
 
   useEffect(() => {
@@ -26,9 +27,10 @@ function ProductDetails() {
         setLoading(true);
         setError("");
 
-        const productData = await getProductById(id);
+       const productData = await getProductById(id);
 
-        setProduct(productData);
+setProduct(productData);
+setSelectedImage(productData.images?.[0] || productData.thumbnail);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -61,12 +63,31 @@ if (error) {
 
         {/* PRODUCT IMAGE */}
 
-        <div className="product-details-image">
-          <img
-            src={product.images[0]}
-            alt={product.title}
-          />
-        </div>
+        <div className="product-images">
+  <img
+    src={selectedImage}
+    alt={product.title}
+    className="details-image"
+  />
+
+  <div className="image-thumbnails">
+    {product.images.map((image, index) => (
+      <button
+        key={index}
+        type="button"
+        className={`thumbnail-button ${
+          selectedImage === image ? "active-thumbnail" : ""
+        }`}
+        onClick={() => setSelectedImage(image)}
+      >
+        <img
+          src={image}
+          alt={`${product.title} ${index + 1}`}
+        />
+      </button>
+    ))}
+  </div>
+</div>
 
 
         {/* PRODUCT INFORMATION */}

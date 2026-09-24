@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useCart } from "../context/CartContext";
@@ -5,6 +6,7 @@ import CartItem from "../components/CartItem";
 
 function Cart() {
   const { cartItems } = useCart();
+  const [checkoutMessage, setCheckoutMessage] = useState("");
 
 
   const subtotal = cartItems.reduce(
@@ -108,9 +110,22 @@ function Cart() {
           </div>
 
 
-          <button className="checkout-btn">
-            Checkout
-          </button>
+         <button
+  className="checkout-btn"
+  onClick={() =>
+    setCheckoutMessage(
+      "Checkout is not available in this demo."
+    )
+  }
+>
+  Checkout
+</button>
+
+{checkoutMessage && (
+  <p className="checkout-message">
+    {checkoutMessage}
+  </p>
+)}
 
         </div>
 

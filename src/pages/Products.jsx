@@ -134,15 +134,6 @@ const [selectedCategory, setSelectedCategory] =
 
 
   // =========================
-  // LOADING
-  // =========================
-
-  if (loading) {
-  return <LoadingState message="Loading products..." />;
-}
-
-
-  // =========================
   // ERROR
   // =========================
 
@@ -180,11 +171,13 @@ const [selectedCategory, setSelectedCategory] =
       </div>
 
 
-      {products.length > 0 ? (
-        <ProductGrid products={products} />
-      ) : (
-        <EmptyState />
-      )}
+     {loading ? (
+  <LoadingState message="Loading products..." />
+) : products.length > 0 ? (
+  <ProductGrid products={products} />
+) : (
+  <EmptyState />
+)}
 
 
       {totalPages > 1 && (
