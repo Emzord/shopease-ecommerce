@@ -1561,3 +1561,41 @@
 .active-thumbnail {
   border: 2px solid #111;
 }
+
+
+
+.cart-toast {
+  position: fixed;
+  top: 90px;
+  right: 25px;
+  background-color: #111;
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: toastSlideIn 0.3s ease;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .cart-toast {
+    top: 130px;
+    right: 15px;
+    left: 15px;
+    text-align: center;
+  }
+}

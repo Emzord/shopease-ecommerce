@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
 
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { login } = useAuth();
 
@@ -32,9 +33,11 @@ function Login() {
     try {
       setLoading(true);
 
-      await login(username, password);
+     await login(username, password);
 
-      navigate("/profile");
+const destination = location.state?.from || "/profile";
+
+navigate(destination);
 
     } catch (error) {
       setError(error.message);

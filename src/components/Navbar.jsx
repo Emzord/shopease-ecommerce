@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
 
   const { cartCount } = useCart();
+  const { user } = useAuth();
 
   return (
     <nav className="navbar">
@@ -18,8 +19,16 @@ function Navbar() {
       </div>
 
       <div className="nav-actions">
-        <Link to="/login">Login</Link>
-        <Link to="/profile">Profile</Link>
+        {user ? (
+  <>
+    <span className="logged-in-user">
+      Hi, {user.firstName}
+    </span>
+    <Link to="/profile">Profile</Link>
+  </>
+) : (
+  <Link to="/login">Login</Link>
+)}
        <Link to="/cart">
   Cart ({cartCount})
 </Link>

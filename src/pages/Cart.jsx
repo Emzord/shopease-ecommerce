@@ -2,10 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 import CartItem from "../components/CartItem";
+
+
 
 function Cart() {
   const { cartItems } = useCart();
+  const { user } = useAuth();
   const [checkoutMessage, setCheckoutMessage] = useState("");
 
 
@@ -114,7 +118,9 @@ function Cart() {
   className="checkout-btn"
   onClick={() =>
     setCheckoutMessage(
-      "Checkout is not available in this demo."
+      user
+        ? "Checkout is not available in this demo."
+        : "Please login to proceed with checkout."
     )
   }
 >
@@ -122,9 +128,21 @@ function Cart() {
 </button>
 
 {checkoutMessage && (
-  <p className="checkout-message">
-    {checkoutMessage}
-  </p>
+  <>
+    <p className="checkout-message">
+      {checkoutMessage}
+    </p>
+
+    {!user && (
+      <Link
+        to="/login"
+        state={{ from: "/cart" }}
+        className="profile-login-btn"
+      >
+        Login
+      </Link>
+    )}
+  </>
 )}
 
         </div>

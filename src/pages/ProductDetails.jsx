@@ -19,6 +19,7 @@ function ProductDetails() {
   const { addToCart } = useCart();
 
   const [selectedImage, setSelectedImage] = useState("");
+  const [cartMessage, setCartMessage] = useState("");
 
 
   useEffect(() => {
@@ -41,6 +42,15 @@ setSelectedImage(productData.images?.[0] || productData.thumbnail);
     loadProduct();
   }, [id]);
 
+async function handleAddToCart() {
+  await addToCart(product, quantity);
+
+  setCartMessage("✓ Product added to cart!");
+
+  setTimeout(() => {
+    setCartMessage("");
+  }, 2500);
+}
 
   if (loading) {
   return <LoadingState message="Loading product..." />;
@@ -142,11 +152,17 @@ if (error) {
 
           <button
   className="add-to-cart-btn"
-  onClick={() => addToCart(product, quantity)}
+  onClick={handleAddToCart}
   disabled={product.stock === 0}
 >
   Add to Cart
-</button>
+          </button>
+          
+          {cartMessage && (
+  <div className="cart-toast">
+    {cartMessage}
+  </div>
+)}
 
         </div>
 
